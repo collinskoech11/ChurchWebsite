@@ -1,90 +1,93 @@
-import React from 'react';
-import { MDBIcon, MDBSideNavCat, MDBSideNavNav, MDBSideNav, MDBSideNavLink, MDBContainer, MDBRow, MDBBtn } from 'mdbreact';
+import React, { Component } from "react";
+import {
+MDBNavbar, MDBNavbarNav, MDBNavItem, MDBNavbarToggler, MDBCollapse, MDBFormInline,
+MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem
+} from "mdbreact";
 import { BrowserRouter as Router } from 'react-router-dom';
+import {Nav,Navbar} from 'react-bootstrap';
 
-class SideNavPage extends React.Component {
-  state = {
-    isOpen: false
-  }
 
-  handleToggle = () => {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
-  };
+class SideNavPage extends Component {
+state = {
+  isOpen: false
+};
 
-  render() {
-    const { isOpen } = this.state;
-    return (
-      <Router>
-        <MDBContainer>
-          <MDBRow>
-            <MDBBtn onClick={this.handleToggle}><MDBIcon icon="bars" size="5x" /></MDBBtn>
-          </MDBRow>
-          <MDBSideNav
-            logo="https://mdbootstrap.com/img/logo/mdb-transparent.png"
-            hidden
-            triggerOpening={isOpen}
-            breakWidth={1300}
-            className="deep-purple darken-4"
-          >
-            <li>
-              <ul className="social">
-                <li>
-                  <a href="#!">
-                    <MDBIcon fab icon="facebook-f" />
-                  </a>
-                </li>
-                <li>
-                  <a href="#!">
-                    <MDBIcon fab icon="pinterest" />
-                  </a>
-                </li>
-                <li>
-                  <a href="#!">
-                    <MDBIcon fab icon="google-plus-g" />
-                  </a>
-                </li>
-                <li>
-                  <a href="#!">
-                    <MDBIcon fab icon="twitter" />
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <MDBSideNavNav>
-              <MDBSideNavCat
-                name="Submit blog"
-                id="submit-blog"
-                icon="chevron-right"
-              >
-                <MDBSideNavLink>Submit listing</MDBSideNavLink>
-                <MDBSideNavLink>Registration form</MDBSideNavLink>
-              </MDBSideNavCat>
-              <MDBSideNavCat
-                name="Instruction"
-                id="instruction"
-                iconRegular
-                icon="hand-pointer"
-                href="#"
-              >
-                <MDBSideNavLink>For bloggers</MDBSideNavLink>
-                <MDBSideNavLink>For authors</MDBSideNavLink>
-              </MDBSideNavCat>
-              <MDBSideNavCat name="About" id="about" icon="eye">
-                <MDBSideNavLink>Instruction</MDBSideNavLink>
-                <MDBSideNavLink>Monthly meetings</MDBSideNavLink>
-              </MDBSideNavCat>
-              <MDBSideNavCat name="Contact me" id="contact-me" iconRegular icon="envelope">
-                <MDBSideNavLink>FAQ</MDBSideNavLink>
-                <MDBSideNavLink>Write a message</MDBSideNavLink>
-              </MDBSideNavCat>
-            </MDBSideNavNav>
-          </MDBSideNav>
-        </MDBContainer>
-      </Router>
+toggleCollapse = () => {
+  this.setState({ isOpen: !this.state.isOpen });
+}
+
+render() {
+  return (
+    <Router>
+      <div className="nav-con">
+      <MDBNavbar color="indigo" dark expand="md"  margin-bottom="50px">
+        <Navbar.Brand href="/">
+          <strong className="white-text">Gikosh.com</strong>
+        </Navbar.Brand>
+        <MDBNavbarToggler onClick={this.toggleCollapse} />
+        <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
+          <MDBNavbarNav left>
+            <MDBNavItem active to="/">
+            <Nav.Link href="/">Home</Nav.Link>
+            </MDBNavItem>
+            <MDBNavItem>
+              <Nav.Link href="/CheckOut">checkout</Nav.Link>
+            </MDBNavItem>
+           
+           
+
+            <MDBNavItem>
+              <MDBDropdown>
+                <MDBDropdownToggle nav caret>
+                  <span className="mr-2">Categories</span>
+                </MDBDropdownToggle>
+                <MDBDropdownMenu>
+                  <MDBDropdownItem href="/WomensWear">Women's Wear</MDBDropdownItem>
+                  <MDBDropdownItem href="/MensWear">Men's Wear</MDBDropdownItem>
+                  <MDBDropdownItem href="Watches">Watches</MDBDropdownItem>
+                  <MDBDropdownItem href="Shoes">Shoes</MDBDropdownItem>
+                  <MDBDropdownItem href="Shoes">Bales for Sale</MDBDropdownItem>
+                </MDBDropdownMenu>
+              </MDBDropdown>
+            </MDBNavItem>
+
+            <MDBNavItem href="/AboutPage">
+            <Nav.Link href="/AboutPage">About Us</Nav.Link>
+            </MDBNavItem>
+
+
+            <MDBNavItem>
+            <MDBDropdown>
+              <MDBDropdownToggle nav caret>
+                <span className="mr-2">Help</span>
+              </MDBDropdownToggle>
+              <MDBDropdownMenu>
+                <MDBDropdownItem href="/ContactUs">Contact Us</MDBDropdownItem>
+                <MDBDropdownItem href="/Location">Find Us</MDBDropdownItem>
+                <MDBDropdownItem href="/MensWear">FAQs</MDBDropdownItem>               
+              </MDBDropdownMenu>
+            </MDBDropdown>
+          </MDBNavItem>
+
+          </MDBNavbarNav>
+          <MDBNavbarNav right>
+            <MDBNavItem>
+              <MDBFormInline waves>
+                <div className="md-form my-0">
+                  <input className="form-control mr-sm-1" type="text" placeholder="Search" aria-label="Search" />
+                </div>
+              </MDBFormInline>
+            </MDBNavItem>
+            <MDBNavItem>
+              <Nav.Link href="/Login">Login/SignUp</Nav.Link>
+            </MDBNavItem>
+          </MDBNavbarNav>
+        </MDBCollapse>
+      </MDBNavbar>
+      </div>
+    </Router>
     );
   }
 }
 
-export default SideNavPage
+export default SideNavPage;

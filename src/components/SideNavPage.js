@@ -87,4 +87,4 @@ class SideNavPage extends React.Component {
   }
 }
 
-export default SideNavPage;
+export default SideNavPage
